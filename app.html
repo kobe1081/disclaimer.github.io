@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting to App Store...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function() {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+
+      if (/android/i.test(ua)) {
+        // Android 用户 ➜ Google Play
+        window.location.replace("https://play.google.com/store/apps/details?id=com.lovisa.lovisa_global");
+      } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+        // iOS 用户 ➜ App Store
+        window.location.replace("https://apps.apple.com/us/app/lovisa/id6739979183");
+      } else {
+        // 其他设备（PC、Mac、未知）➜ 可跳转到官网或提示页
+        window.location.replace("https://www.lovisa.com/"); // 可改成你的官网
+      }
+    })();
+  </script>
+</head>
+<body>
+  <noscript>
+    <p>请启用 JavaScript 以跳转到应用商店。</p>
+  </noscript>
+</body>
+</html>
