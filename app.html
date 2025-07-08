@@ -1,4 +1,4 @@
-<meta charset="UTF-8">
+<!-- <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
   (function() {
@@ -38,4 +38,55 @@
 
 <noscript>
   <p>Please enable JavaScript to be redirected to the app store.</p>
+</noscript> -->
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  (function () {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    var isAndroid = /android/i.test(ua);
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+
+    // Universal Link（App 若安装则会被拦截）
+    var universalLink = "https://lovisauniversallinktest.web.app/download";
+
+    // 商店链接
+    var androidStore = "https://play.google.com/store/apps/details?id=com.lovisa.lovisa_global";
+    var iosStore = "https://apps.apple.com/us/app/lovisa/id6739979183";
+    var fallbackWebsite = "https://www.lovisa.com/";
+
+    if (isIOS) {
+      // iOS 使用 iframe + setTimeout 检测是否打开成功
+      var clickedAt = Date.now();
+
+      var iframe = document.createElement("iframe");
+      iframe.style.display = "none";
+      iframe.src = universalLink;
+      document.body.appendChild(iframe);
+
+      setTimeout(function () {
+        if (Date.now() - clickedAt < 1500) {
+          // App 没有打开（说明未安装），跳 App Store
+          window.location = iosStore;
+        }
+      }, 1200);
+
+    } else if (isAndroid) {
+      // Android 直接跳 universal link，并做 fallback
+      window.location = universalLink;
+      setTimeout(function () {
+        window.location = androidStore;
+      }, 2000);
+    } else {
+      // 其他平台跳转官网
+      window.location = fallbackWebsite;
+    }
+  })();
+</script>
+
+<noscript>
+  <p>Please enable JavaScript to redirect to the app store.</p>
 </noscript>
