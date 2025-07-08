@@ -59,20 +59,21 @@
     var fallbackWebsite = "https://www.lovisa.com/";
 
     if (isIOS) {
+      window.location = iosStore;
       // iOS 使用 iframe + setTimeout 检测是否打开成功
-      var clickedAt = Date.now();
+      // var clickedAt = Date.now();
 
-      var iframe = document.createElement("iframe");
-      iframe.style.display = "none";
-      iframe.src = universalLink;
-      document.body.appendChild(iframe);
+      // var iframe = document.createElement("iframe");
+      // iframe.style.display = "none";
+      // iframe.src = universalLink;
+      // document.body.appendChild(iframe);
 
-      setTimeout(function () {
-        if (Date.now() - clickedAt < 1500) {
-          // App 没有打开（说明未安装），跳 App Store
-          window.location = iosStore;
-        }
-      }, 1200);
+      // setTimeout(function () {
+      //   if (Date.now() - clickedAt < 1500) {
+      //     // App 没有打开（说明未安装），跳 App Store
+      //     window.location = iosStore;
+      //   }
+      // }, 1200);
 
     } else if (isAndroid) {
       // Android 直接跳 universal link，并做 fallback
