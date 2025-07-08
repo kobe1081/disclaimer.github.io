@@ -1,93 +1,41 @@
-<!-- <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>
-  (function() {
-    var ua = navigator.userAgent || navigator.vendor || window.opera;
-    var isAndroid = /android/i.test(ua);
-    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open App</title>
+  <style>
+    body { display: flex; align-items: center; justify-content: center; height: 100vh; }
+    #openBtn { font-size: 1.2em; padding: 1em 2em; }
+  </style>
+</head>
+<body>
+  <button id="openBtn">打开 App</button>
+  <script>
+    document.getElementById('openBtn').addEventListener('click', function () {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isAndroid = /android/i.test(ua);
+      var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+      var universalLink = "https://lovisauniversallinktest.web.app/download";
+      var androidStore = "https://play.google.com/store/apps/details?id=com.lovisa.lovisa_global";
+      var iosStore = "https://apps.apple.com/us/app/lovisa/id6739979183";
+      var fallbackWebsite = "https://www.lovisa.com/";
 
-    // 你的 Universal Link
-    var universalLink = "https://lovisauniversallinktest.web.app/download";
-
-    // App Store / Play Store 链接
-    var androidStore = "https://play.google.com/store/apps/details?id=com.lovisa.lovisa_global";
-    var iosStore = "https://apps.apple.com/us/app/lovisa/id6739979183";
-    var fallbackWebsite = "https://www.lovisa.com/";
-
-    // 超时时间，用于判断是否未安装 App
-    var timeout;
-
-    if (isAndroid || isIOS) {
-      // 尝试唤起 App（Universal Link）
-      window.location = universalLink;
-
-      // 如果 App 未安装，2 秒后跳转商店
-      timeout = setTimeout(function () {
-        if (isAndroid) {
-          window.location.replace(androidStore);
-        } else if (isIOS) {
-          window.location.replace(iosStore);
-        }
-      }, 2000);
-    } else {
-      // 其他平台跳转官网
-      window.location.replace(fallbackWebsite);
-    }
-  })();
-</script>
-
-<noscript>
-  <p>Please enable JavaScript to be redirected to the app store.</p>
-</noscript> -->
-
-
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>
-  (function () {
-    var ua = navigator.userAgent || navigator.vendor || window.opera;
-    var isAndroid = /android/i.test(ua);
-    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-
-    // Universal Link（App 若安装则会被拦截）
-    var universalLink = "https://lovisauniversallinktest.web.app/download";
-
-    // 商店链接
-    var androidStore = "https://play.google.com/store/apps/details?id=com.lovisa.lovisa_global";
-    var iosStore = "https://apps.apple.com/us/app/lovisa/id6739979183";
-    var fallbackWebsite = "https://www.lovisa.com/";
-
-    if (isIOS) {
-      window.location = iosStore;
-      // iOS 使用 iframe + setTimeout 检测是否打开成功
-      // var clickedAt = Date.now();
-
-      // var iframe = document.createElement("iframe");
-      // iframe.style.display = "none";
-      // iframe.src = universalLink;
-      // document.body.appendChild(iframe);
-
-      // setTimeout(function () {
-      //   if (Date.now() - clickedAt < 1500) {
-      //     // App 没有打开（说明未安装），跳 App Store
-      //     window.location = iosStore;
-      //   }
-      // }, 1200);
-
-    } else if (isAndroid) {
-      // Android 直接跳 universal link，并做 fallback
-      window.location = universalLink;
-      setTimeout(function () {
-        window.location = androidStore;
-      }, 2000);
-    } else {
-      // 其他平台跳转官网
-      window.location = fallbackWebsite;
-    }
-  })();
-</script>
-
-<noscript>
-  <p>Please enable JavaScript to redirect to the app store.</p>
-</noscript>
+      if (isIOS) {
+        // 直接跳转 universal link，等待 fallback
+        window.location = universalLink;
+        setTimeout(function () {
+          window.location = iosStore;
+        }, 1800);
+      } else if (isAndroid) {
+        window.location = universalLink;
+        setTimeout(function () {
+          window.location = androidStore;
+        }, 1800);
+      } else {
+        window.location = fallbackWebsite;
+      }
+    });
+  </script>
+</body>
+</html>
