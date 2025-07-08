@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -37,5 +37,34 @@
       }
     });
   </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>正在打开 Lovisa App...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 可选 Smart App Banner（增强体验） -->
+  <meta name="apple-itunes-app" content="app-id=6739979183, app-argument=https://lovisauniversallinktest.web.app/products/789">
+  <script>
+    const start = Date.now();
+
+    // 立即尝试打开 Universal Link
+    window.location.href = 'https://lovisauniversallinktest.web.app/products/789';
+
+    // 如果 2 秒后 App 没唤起，则跳转到 App Store
+    setTimeout(() => {
+      const now = Date.now();
+      if (now - start < 2500) {
+        window.location.href = 'https://apps.apple.com/us/app/lovisa/id6739979183';
+      }
+    }, 2000);
+  </script>
+</head>
+<body>
+  <p>正在打开 App，请稍候...</p>
 </body>
 </html>
