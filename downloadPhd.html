@@ -14,24 +14,24 @@
     .wechat-tip {
       display: none;
     }
-    .wechat-tip img {
-      width: 80%;
-      max-width: 300px;
-      margin-top: 20px;
+    .wechat-tip p {
+      font-size: 18px;
+      color: #333;
     }
   </style>
   <script>
     window.onload = function () {
       var ua = navigator.userAgent.toLowerCase();
       var isWeChat = ua.indexOf("micromessenger") !== -1;
+      var isIOS = /iphone|ipad|ipod/.test(ua);
 
-      if (isWeChat) {
-        // 微信內打開 → 顯示提示
+      if (isWeChat && isIOS) {
+        // 僅在 iOS 微信中顯示提示
         document.getElementById("wechatTip").style.display = "block";
         document.getElementById("loadingText").style.display = "none";
       } else {
-        // 正常跳轉
-        if (/iphone|ipad|ipod/.test(ua)) {
+        // 其他環境自動跳轉
+        if (isIOS) {
           window.location.href = "https://apps.apple.com/us/app/%E5%85%85%E9%9B%BB%E5%8D%9A%E5%A3%AB/id6446137813";
         } else if (/android/.test(ua)) {
           window.location.href = "https://play.google.com/store/apps/details?id=com.bsc.kino";
@@ -45,8 +45,8 @@
 <body>
   <p id="loadingText">正在為您跳轉，請稍候...</p>
   <div id="wechatTip" class="wechat-tip">
-    <p>⚠️ 您正在微信中打開，請點擊右上角選單，選擇 <b>「在瀏覽器中打開」</b> 以繼續下載。</p>
-    
+    <p>⚠️ 您正在 <b>微信</b> 中打開，請點擊右上角選單 → 選擇 <b>「在瀏覽器中打開」</b> 以繼續下載。</p>
+    <!-- 這裡放你的提示圖片，例如一張箭頭指向右上角的圖 -->
   </div>
 </body>
 </html>
