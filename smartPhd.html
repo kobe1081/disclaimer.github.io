@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App 自動跳轉</title>
+  <script>
+    window.onload = function () {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      if (/iPhone|iPad|iPod/i.test(userAgent)) {
+        // iOS
+        window.location.href = "https://apps.apple.com/us/app/%E5%85%85%E9%9B%BB%E5%8D%9A%E5%A3%AB/id6446137813";
+      } else if (/android/i.test(userAgent)) {
+        // Android
+        window.location.href = "https://play.google.com/store/apps/details?id=com.bsc.kino";
+      } else {
+        // 其他設備 (例如 Windows, Mac, Linux)
+        window.location.href = "https://www.charging.phd/";
+      }
+    };
+  </script>
+</head>
+<body>
+  <p>正在為您跳轉，請稍候...</p>
+</body>
+</html>
